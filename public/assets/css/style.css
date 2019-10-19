@@ -1,0 +1,64 @@
+body {
+  color: #222222;
+  font-family: 'EB Garamond', serif !important;
+}
+.card {
+  box-shadow: -3px -3px 2px rgba(0, 0, 0, 0.4);
+  width: 295;
+}
+.noneList {
+  list-style-type: none;
+  padding: 0;
+}
+.noneList li {
+  color: #757575;
+}
+.subTitle {
+  color: #353535;
+}
+.subTitle i {
+  font-size: 23px;
+  padding: 5px;
+}
+.subTitle a {
+  color: #757575;
+}
+.copyRight {
+  background: black;
+  padding: 20px;
+  color: #757575;
+}
+
+.titleCatalog {
+  color: #222222;
+  padding: 10px, 10px, 10px;
+}
+.hr {
+  padding-top: 25px;
+  border-bottom: 2px solid #757575;
+}
+.price {
+  font-size: 17px;
+  font-weight: 700px;
+  color: #222222;
+}
+
+.boxSize {
+  border: 1px solid yellow;
+}
+
+.tales {
+  width: 100%;
+}
+
+.jumbotron {
+  width: 100%;
+  height: 530px;
+}
+
+.link {
+  color: #757575;
+}
+.link:hover {
+  text-decoration: none;
+}
