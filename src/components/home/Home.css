@@ -1,0 +1,13 @@
+body {
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+}
+.title-product {
+  color: #6e6e6e;
+}
+.price {
+  padding-top: 20px;
+}
+.text-right h5 {
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  color: #ffadaf;
+}

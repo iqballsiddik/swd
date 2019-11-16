@@ -6,6 +6,7 @@ import NavBar from '../navBar/NavBar';
 import Footer from '../footer/Footer';
 import DetailItem from '../detailItem/DetailItem';
 import About from '../about/About';
+import Hijab from '../product/hijab/Hijab';
 
 // this use react context
 // create context
@@ -36,6 +37,7 @@ export default function Routers() {
         <Route exact path="/" component={Home} />
         <Route path="/nav-bar" component={NavBar} />
         <Route path="/about" component={About} />
+        <Route path="/hijab" component={Hijab} />
         <Route path="/footer" component={Footer} />
         <Route path="/detailitem" component={DetailItem} />
       </Provider>
