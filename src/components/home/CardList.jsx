@@ -7,7 +7,9 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { Link } from 'react-router-dom';
+import './Home.css'
 
+// tes gitignore
 const useStyles = makeStyles({
   root: {
     paddingTop: 20
@@ -64,10 +66,11 @@ const CardList = props => {
             <CardMedia className={classes.media} image={props.img} />
           </Link>
           <CardContent>
-            <TextCenter>
-              <Typography variant="h5">{props.title}</Typography>
-              <HargaText>Rp.{props.price}</HargaText>
-            </TextCenter>
+            <Typography variant="h5" className="title-product">{props.title}</Typography>
+            <div className="price text-right text-bold">
+              <h5>Rp.{props.price}</h5>
+              <small>Tersedia</small>
+            </div>
           </CardContent>
         </CardContent>
       </Card>

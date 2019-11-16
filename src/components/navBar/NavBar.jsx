@@ -71,6 +71,11 @@ export default function NavBar() {
               Home
             </Link>
           </Button>
+          <Button color="inherit">
+            <Link to="/hijab" className="link">
+              Hijab
+            </Link>
+          </Button>
           <Button color="red">
             <Link to="/about" className="link">
               About
