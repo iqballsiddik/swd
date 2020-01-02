@@ -50,9 +50,9 @@ const HargaText = styled.p`
 
 // className={classes.card}
 // this is use arrow function
-const CardList = props => {
+const CardList = ({ id, title, image, color, price, props }) => {
   const classes = useStyles();
-  const dataCatalog = props;
+  const productContainer = { id, title, image, color, price };
   return (
     <Grid item>
       <Card className={classes.card}>
@@ -60,15 +60,15 @@ const CardList = props => {
           <Link
             to={{
               pathname: '/detailitem',
-              state: { foo: dataCatalog }
+              state: { foo: productContainer }
             }}
           >
-            <CardMedia className={classes.media} image={props.img} />
+            <CardMedia className={classes.media} image={image} />
           </Link>
           <CardContent>
-            <Typography variant="h5" className="title-product">{props.title}</Typography>
+            <Typography variant="h5" className="title-product">{title}</Typography>
             <div className="price text-right text-bold">
-              <h5>Rp.{props.price}</h5>
+              <h5>Rp.{price}</h5>
               <small>Tersedia</small>
             </div>
           </CardContent>
