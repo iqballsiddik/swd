@@ -21,10 +21,12 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import LocalAtmIcon from '@material-ui/icons/LocalAtm';
+import './NavBar.css';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    fontFamily: " Roboto, Helvetica, Arial, sans- serif"
   },
   menuButton: {
     marginRight: theme.spacing(2)
@@ -56,34 +58,42 @@ const imgLogo = './assets/img/logo-swd.JPG';
 
 export default function NavBar() {
   const classes = useStyles();
-
   return (
     <div className={classes.root}>
-      <AppBar position="fixed">
-        <Toolbar className={classes.colorBar}>
-          <Typography variant="h6" className={classes.title}>
-            <Link to="/">
-              <img src={imgLogo} width="180px" height="70px" />
-            </Link>
-          </Typography>
-          <Button color="inherit">
-            <Link to="/" className="link">
-              Home
-            </Link>
-          </Button>
-          <Button color="inherit">
-            <Link to="/hijab" className="link">
-              Hijab
-            </Link>
-          </Button>
-          <Button color="red">
-            <Link to="/about" className="link">
-              About
-            </Link>
-          </Button>
-          <BtnDrawer />
-        </Toolbar>
-      </AppBar>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <Link to="/">
+          <img src={imgLogo} width="180px" height="70px" />
+        </Link>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse d-flex justify-content-end pr-5" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <Button color="inherit">
+                <Link to="/" className="link">
+                  Home
+                </Link>
+              </Button>
+            </li>
+            <li class="nav-item">
+              <Button color="inherit">
+                <Link to="/hijab" className="link">
+                  Hijab
+                </Link>
+              </Button>
+            </li>
+            <li class="nav-item">
+              <Button color="red">
+                <Link to="/about" className="link">
+                  About
+                </Link>
+              </Button>
+            </li>
+            <BtnDrawer className="iconTrolly" />
+          </ul>
+        </div>
+      </nav>
     </div>
   );
 }

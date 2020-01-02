@@ -23,8 +23,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-const imgDetail = './assets/img/catalog/left1.jpeg';
-
 // this is dialog
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -70,15 +68,17 @@ const WrapValue = styled.div`
 function DetailCatalog(props) {
   const classes = useStyles();
   const dataOrder = props.data;
-  console.log(dataOrder);
+
   return (
     <div className={classes.root}>
       <Container>
+        <h4>Detail {dataOrder.title} </h4>
+        <hr></hr>
         <Grid container spacing={2}>
           <Grid item xs={6} className="text-center">
             <figure class="figure">
               <img
-                src={dataOrder.img}
+                src={dataOrder.image}
                 class="figure-img img-fluid rounded"
                 alt="..."
                 width="500"
@@ -107,7 +107,7 @@ function DetailCatalog(props) {
             </WrapPadding>
             <hr />
             <WrapPadding>
-              <AddCart />
+              <AddCart {...props} />
             </WrapPadding>
             <hr />
             <WrapPadding>
@@ -121,8 +121,10 @@ function DetailCatalog(props) {
 }
 
 // this is addCart order
-const AddCart = () => {
+// proses add cart sampe sini. belum di perbaiki add cart nambah barang pass data barang ke counter
+const AddCart = (props) => {
   const classes = useStyles();
+  const tes = props.data;
   return (
     <div>
       <RootContext.Consumer>
