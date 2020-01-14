@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import NavBar from '../navBar/NavBar';
 import styled from 'styled-components';
 import Container from '@material-ui/core/Container';
@@ -6,6 +6,8 @@ import Grid from '@material-ui/core/Grid';
 import CardList from './CardList';
 import Footer from '../footer/Footer';
 import BannerSlider from './BannerSlider';
+
+
 
 const WrapBoxBody = styled.div`
   margin: 82px;
@@ -79,7 +81,9 @@ const product = [
   },
 ]
 
+
 export default function Home() {
+
   return (
     <div>
       <NavBar />
@@ -91,9 +95,6 @@ export default function Home() {
           <Grid item xs={12}>
             <Grid container justify="center" spacing={2}>
               {
-                // product.map((item, key) => {
-                //   return <CardList title={item.title} price={item.price} img={item.image} color={item.color} key={key} />
-                // })
                 product.map(p => <CardList key={p.id} {...p} />)
               }
             </Grid>
@@ -102,5 +103,5 @@ export default function Home() {
       </WrapBoxBody>
       <Footer />
     </div>
-  );
+  )
 }

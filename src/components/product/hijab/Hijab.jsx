@@ -8,7 +8,6 @@ import CardContent from '@material-ui/core/CardContent';
 import { makeStyles } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import './Hijab.css';
-import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
 	card: {
