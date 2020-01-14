@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
@@ -22,6 +22,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Skeleton from '@material-ui/lab/Skeleton';
 
 // this is dialog
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -69,53 +70,85 @@ function DetailCatalog(props) {
   const classes = useStyles();
   const dataOrder = props.data;
 
+
   return (
     <div className={classes.root}>
-      <Container>
-        <h4>Detail {dataOrder.title} </h4>
-        <hr></hr>
-        <Grid container spacing={2}>
-          <Grid item xs={6} className="text-center">
-            <figure class="figure">
-              <img
-                src={dataOrder.image}
-                class="figure-img img-fluid rounded"
-                alt="..."
-                width="500"
-                height="auto"
-              />
-            </figure>
-          </Grid>
-          <Grid item xs={6}>
-            <Typography variant="h5" className="titleCatalog">
-              {dataOrder.title}
-            </Typography>
-            <div className="hr"></div>
-            <WrapPadding>
-              <p className="price">{dataOrder.price}</p>
-            </WrapPadding>
-            <hr />
-            <WrapPadding>
-              <p className="price">Warna *</p>
-              <Grid container item xs={12}>
-                <div className="text-center">
-                  <WrapIcon style={{ backgroundColor: dataOrder.color }}>
-                    <CheckCircleOutlineIcon />
-                  </WrapIcon>
-                </div>
+      <RootContext.Consumer>
+        {value => {
+          return (
+            <Container>
+              {
+                value.loading ?
+                  <Skeleton animation="wave" width="20%" />
+                  : <h4>Detail {dataOrder.title} </h4>
+              }
+              <hr></hr>
+              <Grid container spacing={2}>
+                <Grid item xs={6} className="text-center">
+                  {
+                    value.loading ?
+                      <Skeleton variant="rect" width={560} height={530} />
+                      : <figure class="figure">
+                        <img
+                          src={dataOrder.image}
+                          class="figure-img img-fluid rounded"
+                          alt="..."
+                          width="500"
+                          height="auto"
+                        />
+                      </figure>
+                  }
+                </Grid>
+                <Grid item xs={6}>
+                  {
+                    value.loading ?
+                      <Skeleton animation="wave" width="20%" />
+                      : <Typography variant="h5" className="titleCatalog">
+                        {dataOrder.title}
+                      </Typography>
+                  }
+                  <div className="hr"></div>
+                  {
+                    value.loading ?
+                      <Skeleton animation="wave" width="20%" />
+                      : <WrapPadding>
+                        <p className="price">{dataOrder.price}</p>
+                      </WrapPadding>
+                  }
+                  <hr />
+                  <WrapPadding>
+                    {
+                      value.loading ?
+                        <Skeleton animation="wave" width="20%" />
+                        : <p className="price">Warna *</p>
+                    }
+                    <Grid container item xs={12}>
+                      {
+                        value.loading ?
+                          <Skeleton variant="rect" width={70} height={50} />
+                          : <div className="text-center">
+                            <WrapIcon style={{ backgroundColor: dataOrder.color }}>
+                              <CheckCircleOutlineIcon />
+                            </WrapIcon>
+                          </div>
+                      }
+                    </Grid>
+                  </WrapPadding>
+                  <hr />
+                  <WrapPadding>
+                    <AddCart {...props} />
+                  </WrapPadding>
+                  <hr />
+                  <WrapPadding>
+                    <Panels />
+                  </WrapPadding>
+                </Grid>
               </Grid>
-            </WrapPadding>
-            <hr />
-            <WrapPadding>
-              <AddCart {...props} />
-            </WrapPadding>
-            <hr />
-            <WrapPadding>
-              <Panels />
-            </WrapPadding>
-          </Grid>
-        </Grid>
-      </Container>
+            </Container>
+          )
+        }
+        }
+      </RootContext.Consumer>
     </div>
   );
 }
@@ -124,7 +157,7 @@ function DetailCatalog(props) {
 // proses add cart sampe sini. belum di perbaiki add cart nambah barang pass data barang ke counter
 const AddCart = (props) => {
   const classes = useStyles();
-  const tes = props.data;
+
   return (
     <div>
       <RootContext.Consumer>
@@ -136,7 +169,7 @@ const AddCart = (props) => {
                 aria-label="minus"
                 color="secondary"
                 size="large"
-                onClick={() => value.handleChangeState({ type: 'MINUS' })}
+                onClick={() => value.handleChangeState({ type: 'MINUS', id: props.data.id })}
               >
                 <IndeterminateCheckBoxIcon />
               </IconButton>
@@ -147,7 +180,7 @@ const AddCart = (props) => {
                 className={classes.button}
                 aria-label="add"
                 color="primary"
-                onClick={() => value.handleChangeState({ type: 'PLUS' })}
+                onClick={() => value.handleChangeState({ type: 'PLUS', id: props.data.id })}
               >
                 <AddCircleIcon />
               </IconButton>
@@ -218,51 +251,64 @@ const Panels = () => {
     setExpanded(isExpanded ? panel : false);
   };
   return (
-    <div>
-      <ExpansionPanel
-        expanded={expanded === 'panel1'}
-        onChange={handleChange('panel1')}
-      >
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1bh-content"
-          id="panel1bh-header"
-        >
-          <Typography className={classes.heading}>Informasi Produk</Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography>
-            Size : 120x120cm (segiempat)
-            <br />
-            <br />
-            Bahan : Voal Waffle (tekstur kotak-kotak seperti waffle & sedikit
-            bergelombang,ringan,mudah dibentuk,tegap di dahi,ironless dan tidak
-            terawang).
-            <br />
-            <br />
-            Detail : Jahit tepi rapih
-          </Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-      <ExpansionPanel
-        expanded={expanded === 'panel2'}
-        onChange={handleChange('panel2')}
-      >
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel3bh-content"
-          id="panel3bh-header"
-        >
-          <Typography className={classes.heading}>Bantuan</Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography>
-            <WhatsAppIcon style={{ color: ' green' }} />
-            +62 851 2345 678
-          </Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-    </div>
+    <RootContext.Consumer>
+      {value => {
+        return (
+          <div>
+            {
+              value.loading ?
+                <Skeleton variant="rect" width={580} height={118} />
+                : <div>
+                  <ExpansionPanel
+                    expanded={expanded === 'panel1'}
+                    onChange={handleChange('panel1')}
+                  >
+                    <ExpansionPanelSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1bh-content"
+                      id="panel1bh-header"
+                    >
+                      <Typography className={classes.heading}>Informasi Produk</Typography>
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails>
+                      <Typography>
+                        Size : 120x120cm (segiempat)
+                        <br />
+                        <br />
+                        Bahan : Voal Waffle (tekstur kotak-kotak seperti waffle & sedikit
+                        bergelombang,ringan,mudah dibentuk,tegap di dahi,ironless dan tidak
+                        terawang).
+                        <br />
+                        <br />
+                        Detail : Jahit tepi rapih
+                      </Typography>
+                    </ExpansionPanelDetails>
+                  </ExpansionPanel>
+                  <ExpansionPanel
+                    expanded={expanded === 'panel2'}
+                    onChange={handleChange('panel2')}
+                  >
+                    <ExpansionPanelSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel3bh-content"
+                      id="panel3bh-header"
+                    >
+                      <Typography className={classes.heading}>Bantuan</Typography>
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails>
+                      <Typography>
+                        <WhatsAppIcon style={{ color: ' green' }} />
+                        +62 851 2345 678
+                      </Typography>
+                    </ExpansionPanelDetails>
+                  </ExpansionPanel>
+                </div>
+            }
+          </div>
+        )
+      }
+      }
+    </RootContext.Consumer>
   );
 };
 

@@ -1,9 +1,7 @@
 import React from 'react';
 // import MenuIcon from '@material-ui/icons/Menu';
 import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import { withStyles } from '@material-ui/core/styles';
@@ -18,7 +16,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import LocalAtmIcon from '@material-ui/icons/LocalAtm';
 import './NavBar.css';
@@ -54,43 +51,44 @@ const StyledBadge1 = withStyles(theme => ({
   }
 }))(Badge);
 
-const imgLogo = './assets/img/logo-swd.JPG';
-
 export default function NavBar() {
   const classes = useStyles();
+  const imgLogo = './assets/img/logo-swd.JPG';
   return (
     <div className={classes.root}>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <Link to="/">
           <img src={imgLogo} width="180px" height="70px" />
-        </Link>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        </Link >
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse d-flex justify-content-end pr-5" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item active">
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+          <ul className="navbar-nav">
+            <li className="nav-item active">
               <Button color="inherit">
                 <Link to="/" className="link">
                   Home
                 </Link>
               </Button>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
               <Button color="inherit">
                 <Link to="/hijab" className="link">
                   Hijab
                 </Link>
               </Button>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
               <Button color="red">
                 <Link to="/about" className="link">
                   About
                 </Link>
               </Button>
             </li>
-            <BtnDrawer className="iconTrolly" />
+            <li className="nav-item">
+              <BtnDrawer className="iconTrolly" />
+            </li>
           </ul>
         </div>
       </nav>
